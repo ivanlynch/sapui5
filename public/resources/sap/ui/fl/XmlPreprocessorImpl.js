@@ -1,0 +1,6 @@
+/*!
+ * UI development toolkit for HTML5 (OpenUI5)
+ * (c) Copyright 2009-2016 SAP SE or an SAP affiliate company.
+ * Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
+ */
+sap.ui.define(["jquery.sap.global","sap/ui/core/Component","sap/ui/fl/FlexControllerFactory","sap/ui/fl/Utils","sap/ui/fl/LrepConnector","sap/ui/fl/ChangePersistenceFactory"],function(q,C,F,U,L,a){"use strict";var X=function(){};X.process=function(v,p){try{if(!p||p.sync){U.log.warning("Flexibility feature for applying changes on an xml view is only available for "+"asynchronous views. The merging will be done later on the JS controls itself.");return(v);}p.viewId=p.id;var c=sap.ui.getCore().getComponent(p.componentId);if(!c){U.log.warning("View is generated without an component. Flexibility features are not possible.");return Promise.resolve(v);}var f=U.getComponentClassName(c);var o=F.create(f);return o.processXmlView(v,p).then(function(){q.sap.log.debug("flex processing view "+p.id+" finished");return v;});}catch(e){var E="view "+p.id+": "+e;q.sap.log.info(E);return Promise.resolve(v);}};X.getCacheKey=function(p){var c=sap.ui.getCore().getComponent(p.componentId);var f=U.getComponentClassName(c);var o=a.getChangePersistenceForComponent(f);return o.getCacheKey();};return X;},true);

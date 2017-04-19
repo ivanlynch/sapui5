@@ -46,3 +46,4 @@ fabric.properties
 
 /.idea/workspace.xml
 /.idea/
+/node_modules/
